@@ -1,0 +1,108 @@
+import java.util.Scanner;
+
+public class Principale_coda {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Scanner input = new Scanner(System.in);
+		short scelta=-1;
+		System.out.println("Inserire grandezza coda: ");
+		short n=input.nextShort();
+		coda coda = new coda(n);
+		short Pi=0;
+		short Pe=0;
+		short stato=0;
+		
+		
+		do{
+			System.out.println("\nInserire 1 per immettere nella coda");
+			System.out.println("Inserire 2 per prelevare dalla coda");
+			System.out.println("Inserire 3 per stampare la coda");
+			System.out.println("Immettere 0 per chiudere");
+			scelta=input.nextShort();
+			
+			if (scelta==1){
+				if(stato!=n){
+				Pi = coda.inserimento(Pi);
+				stato ++;
+				}else{
+					System.out.println("Coda piena. Prelevare per svuotare un posto");
+				}
+			}
+			
+			if (scelta==2){
+				if(stato!=0){
+				Pe = coda.estrazione(Pe);
+				stato --;
+				}else{
+					System.out.println("Coda vuota, non c'è niente da prelevare");
+				}
+			}
+			
+			if (scelta==3){
+				coda.stampa();
+			}
+			
+		}while(scelta!=0);
+		
+		input.close();
+	}
+
+}
+
+//In class Coda
+
+import java.util.Scanner;
+
+public class coda {
+
+	public coda(short n){
+	
+	N=n;
+	c = new String [n];
+	}
+	
+	short N;
+	String c[];
+	Scanner input = new Scanner(System.in);
+	
+	public short inserimento(short Pi){
+				
+		if(Pi==N){
+			Pi=0;
+		}
+		if(Pi!=N){
+			System.out.println("Inserire elemento nel posto libero: "+Pi);
+		c[Pi]=input.nextLine();
+			Pi++;
+		}
+		
+		return Pi;
+	}
+	
+	public short estrazione(short Pe){
+		
+		
+		
+		if(Pe==N){
+			Pe=0;
+		}
+		if(Pe!=N){
+			System.out.println("Hai estratto l'elemento: "+c[Pe]+" dal posto numero "+Pe+" liberandolo.");
+		c[Pe]=null;
+		Pe++;
+		}
+		
+		return Pe;
+	}
+	
+	public void stampa(){
+		
+		System.out.println("La coda è: ");
+		short i;
+		for(i=0;i<N;i++){
+			System.out.print("\t"+ c[i]);
+		}
+	}
+}
